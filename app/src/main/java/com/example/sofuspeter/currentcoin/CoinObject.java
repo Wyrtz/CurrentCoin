@@ -43,4 +43,9 @@ class CoinObject {
     public String getMore(){
         return "More";
     }
+
+    @Override
+    public String toString() {
+        return "" + ticker + " " + value + " " + currency;
+    }
 }

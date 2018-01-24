@@ -21,29 +21,12 @@ public class MyCustomAdapter extends ArrayAdapter<CoinObject> {
 
     private static final String TAG = "--->";
 
-    public MyCustomAdapter(Context context, int resource) {
-        super(context, 0);
-    }
-
     public MyCustomAdapter(Context context, int resource, ArrayList<CoinObject> coinList) {
         super(context, 0, coinList);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-//        CoinObject coinObject = getItem(position);
-//
-//        if(convertView == null){
-//            convertView = LayoutInflater.from(getContext()).inflate(R.layout.coin_list_element,parent,false);
-//
-//    }
-//        TextView coinTicker = (TextView) convertView.findViewById(R.id.coinTicker);
-//        TextView value = (TextView) convertView.findViewById(R.id.value);
-//
-//        coinTicker.setText("lalala");
-//
-//        return convertView;
 
         View view = convertView;
 
