@@ -30,7 +30,7 @@ public class MyCustomAdapter extends ArrayAdapter<CoinValue> {
 
         if(view == null){
             LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-            view = layoutInflater.inflate(R.layout.simple_coin_list_element,null);
+            view = layoutInflater.inflate(R.layout.coin_list_element,null);
         }
 
         CoinValue p = getItem(position);
@@ -41,20 +41,21 @@ public class MyCustomAdapter extends ArrayAdapter<CoinValue> {
             TextView currency = (TextView) view.findViewById(R.id.currency);
             TextView change = (TextView) view.findViewById(R.id.change);
             TextView myValue = (TextView) view.findViewById(R.id.myValue);
-            TextView more = (TextView) view.findViewById(R.id.more);
 
             if(coinTicker != null){
-                coinTicker.setText("" + p.getTicker());
-                Log.i(TAG, "Setting coinTicker:" + p.getTicker());
-//                Log.i(TAG, "Setting :" + );
-
+                coinTicker.setText("ololol"); //p.getTicker().toString()
+                Log.i(TAG,"Set ticker to: " + p.getTicker());
             }
 
-            if(value!= null){
+            else{
+                Log.i(TAG,"IS NULL!");
+            }
+
+            if(value != null){
                 value.setText("" + p.getValue());
             }
 
-            if(currency!= null){
+            if(currency != null){
                 currency.setText("" + p.getCurrency());
             }
 
@@ -62,12 +63,8 @@ public class MyCustomAdapter extends ArrayAdapter<CoinValue> {
                 coinTicker.setText("" + p.getChange());
             }
 
-            if(myValue!= null){
+            if(myValue != null){
                 myValue.setText("" + p.getMyValue());
-            }
-
-            if(more != null){
-                coinTicker.setText("" + p.getMore());
             }
 
         }

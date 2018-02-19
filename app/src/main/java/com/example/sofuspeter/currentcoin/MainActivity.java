@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         adapter = new MyCustomAdapter(this, R.id.coinListViewChild, coinArrayList);
         ListView coinList = (ListView) findViewById(R.id.coinList);
         coinList.setAdapter(adapter);
-//        adapter.add(testCoin4);
 
     }
 

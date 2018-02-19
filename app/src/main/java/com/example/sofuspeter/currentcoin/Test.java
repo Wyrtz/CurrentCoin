@@ -19,7 +19,6 @@ public class Test extends AppCompatActivity {
         TextView currency = (TextView) findViewById(R.id.currency);
         TextView change = (TextView) findViewById(R.id.change);
         TextView myValue = (TextView) findViewById(R.id.myValue);
-        TextView more = (TextView) findViewById(R.id.more);
 
         coinTicker.setText("BTC");
     }
