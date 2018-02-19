@@ -1,51 +1,51 @@
 package com.example.sofuspeter.currentcoin;
 
-import android.icu.math.BigDecimal;
-
-import java.util.Currency;
+import java.net.URL;
 
 /**
- * Created by SofusPeter on 18-01-2018.
+ * Created by SofusPeter on 18-02-2018.
  */
-//https://www.geeksforgeeks.org/java-util-currency-methods-example/
-class CoinObject {
 
-    private TICKER ticker;
-    private Double value;
-    private Currency currency;
+public class CoinObject {
 
-    public CoinObject(TICKER ticker, Double value, Currency currency) {
-        this.ticker = ticker;
-        this.value = value;
-        this.currency = currency;
+    private int id;                                         //Internal on cryptocompare (might be needed for further calls)
+    private URL url;                                     //URL to the coin on cryptocompare, eg. https://www.cryptocompare.com/coins/ltc/overview
+    private URL imageUrl;                                //URL to a picture of the coin, eg. https://www.cryptocompare.com/media/19782/litecoin-logo.png
+    private String name;                                    //Name = the symbol eg LTC
+    private String coinName;                                //FullName = name + symbol eg Litecoin (LTC)
+    private String fullName;                                //coinName = name + symbol
+
+    public CoinObject(int id, URL url, URL imageUrl, String name, String coinName, String fullName) {
+        this.id = id;
+        this.url = url;
+        this.imageUrl = imageUrl;
+        this.name = name;
+        this.coinName = coinName;
+        this.fullName = fullName;
     }
 
-    public TICKER getTicker() {
-        return ticker;
+    public int getId() {
+        return id;
     }
 
-    public Double getValue() {
-        return value;
+    public URL getUrl() {
+        return url;
     }
 
-    public Currency getCurrency() {
-        return currency;
+    public URL getImageUrl() {
+        return imageUrl;
     }
 
-    public String getChange(){
-        return "+5%";
+    public String getName() {
+        return name;
     }
 
-    public Double getMyValue(){
-        return (double) Math.round(value * 0.1 * 100)/100;
+    public String getCoinName() {
+        return coinName;
     }
 
-    public String getMore(){
-        return "More";
+    public String getFullName() {
+        return fullName;
     }
 
-    @Override
-    public String toString() {
-        return "" + ticker + " " + value + " " + currency;
-    }
 }

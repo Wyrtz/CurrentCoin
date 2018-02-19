@@ -2,13 +2,10 @@ package com.example.sofuspeter.currentcoin;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,19 +20,19 @@ import java.util.Currency;
  * Created by SofusPeter on 21-12-2017.
  */
 
-public class Updater extends AsyncTask<String, Void,  ArrayList<CoinObject>> {
+public class UpdaterAsyncTask extends AsyncTask<String, Void,  ArrayList<CoinValue>> {
     private static final String TAG = "-->";
     private final MainActivity mainActivityRef;
 
-    public Updater(MainActivity mainActivity) {
+    public UpdaterAsyncTask(MainActivity mainActivity) {
         mainActivityRef = mainActivity;
 
     }
 
     @Override
-    protected ArrayList<CoinObject> doInBackground(String... strings) {
+    protected ArrayList<CoinValue> doInBackground(String... strings) {
 
-        ArrayList<CoinObject> coins = null;
+        ArrayList<CoinValue> coins = null;
 
         try {
             //Connect to the API
@@ -57,9 +54,9 @@ public class Updater extends AsyncTask<String, Void,  ArrayList<CoinObject>> {
             JsonObject ada = jsonObject.get("ADA").getAsJsonObject();
 
             coins  = new ArrayList<>();
-            CoinObject btcCoin = new CoinObject(TICKER.BTC, btc.get("USD").getAsDouble(), Currency.getInstance("USD"));
-            CoinObject ethCoin = new CoinObject(TICKER.ETH, eth.get("USD").getAsDouble(), Currency.getInstance("USD"));
-            CoinObject adaCoin = new CoinObject(TICKER.ADA, ada.get("USD").getAsDouble(), Currency.getInstance("USD"));
+            CoinValue btcCoin = new CoinValue(TICKER.BTC, btc.get("USD").getAsDouble(), Currency.getInstance("USD"));
+            CoinValue ethCoin = new CoinValue(TICKER.ETH, eth.get("USD").getAsDouble(), Currency.getInstance("USD"));
+            CoinValue adaCoin = new CoinValue(TICKER.ADA, ada.get("USD").getAsDouble(), Currency.getInstance("USD"));
             coins.add(btcCoin);
             coins.add(ethCoin);
             coins.add(adaCoin);
@@ -74,9 +71,9 @@ public class Updater extends AsyncTask<String, Void,  ArrayList<CoinObject>> {
     }
 
     @Override
-    protected void onPostExecute(ArrayList<CoinObject> coinObjects) {
-        super.onPostExecute(coinObjects);
-        mainActivityRef.setCoinArrayList(coinObjects);
+    protected void onPostExecute(ArrayList<CoinValue> coinValues) {
+        super.onPostExecute(coinValues);
+        mainActivityRef.setCoinArrayList(coinValues);
     }
 
 }

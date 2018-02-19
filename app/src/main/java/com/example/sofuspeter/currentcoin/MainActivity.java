@@ -7,14 +7,19 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Currency;
+
+//TODO: Get ticker icon
+//TODO: make currency spinner (so you can pick currency)
+//TODO: Create "more" option
+//TODO: Swipe down updates
+//TODO: add price change
+//TODO: Plus to add new currency (how to update then?)
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private View rootView;
     private ConstraintLayout layout;
     private MainActivity activity;
-    private ArrayList<CoinObject> coinArrayList;
+    private ArrayList<CoinValue> coinArrayList;
+    private ArrayList<CoinObject> coinObjects;
     MyCustomAdapter adapter;
     private String TAG = "-->";
 
@@ -41,20 +47,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, updateSuccessText, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                new Updater(activity).execute();
+                new UpdaterAsyncTask(activity).execute();
             }
         });
-        new Updater(this).execute();
+        new UpdaterAsyncTask(this).execute();
+        new InitialDataAsyncTask(this).execute();
 
         //
         coinArrayList = new ArrayList<>();
-//        CoinObject testCoin = new CoinObject(TICKER.BTC, 1250.50, Currency.getInstance("USD"));
-//        CoinObject testCoin2 = new CoinObject(TICKER.ADA, 0.65, Currency.getInstance("USD"));
-//        CoinObject testCoin3 = new CoinObject(TICKER.ETH, 1050.00, Currency.getInstance("USD"));
-//        CoinObject testCoin4 = new CoinObject(TICKER.ETH, 10500.00, Currency.getInstance("DKK"));
-//        coinArrayList.add(testCoin);
-//        coinArrayList.add(testCoin2);
-//        coinArrayList.add(testCoin3);
+        coinObjects = new ArrayList<>();
 
         //
         adapter = new MyCustomAdapter(this, R.id.coinListViewChild, coinArrayList);
@@ -102,9 +103,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(navIntent);
     }
 
-    public void setCoinArrayList(ArrayList<CoinObject> coinArrayList) {
+    public void setCoinArrayList(ArrayList<CoinValue> coinArrayList) {
         this.coinArrayList.clear();
         this.coinArrayList.addAll(coinArrayList);
         adapter.notifyDataSetChanged();
+    }
+
+    public void setCoinObjects(ArrayList<CoinObject> coinObjects) {
+        this.coinObjects.clear();
+        this.coinObjects.addAll(coinObjects);
     }
 }

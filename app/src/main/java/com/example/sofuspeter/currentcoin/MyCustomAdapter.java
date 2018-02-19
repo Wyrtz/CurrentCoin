@@ -1,8 +1,6 @@
 package com.example.sofuspeter.currentcoin;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,12 +14,12 @@ import java.util.ArrayList;
  * Created by SofusPeter on 18-01-2018.
  */
 //https://stackoverflow.com/questions/8166497/custom-adapter-for-list-view
-public class MyCustomAdapter extends ArrayAdapter<CoinObject> {
+public class MyCustomAdapter extends ArrayAdapter<CoinValue> {
 
 
     private static final String TAG = "--->";
 
-    public MyCustomAdapter(Context context, int resource, ArrayList<CoinObject> coinList) {
+    public MyCustomAdapter(Context context, int resource, ArrayList<CoinValue> coinList) {
         super(context, 0, coinList);
     }
 
@@ -35,7 +33,7 @@ public class MyCustomAdapter extends ArrayAdapter<CoinObject> {
             view = layoutInflater.inflate(R.layout.simple_coin_list_element,null);
         }
 
-        CoinObject p = getItem(position);
+        CoinValue p = getItem(position);
 
         if (p!=null){
             TextView coinTicker = (TextView) view.findViewById(R.id.coinTicker);
