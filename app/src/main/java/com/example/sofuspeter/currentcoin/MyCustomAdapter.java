@@ -30,7 +30,7 @@ public class MyCustomAdapter extends ArrayAdapter<CoinValue> {
 
         if(view == null){
             LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-            view = layoutInflater.inflate(R.layout.coin_list_element,null);
+            view = layoutInflater.inflate(R.layout.coin_list_element_grid_fixed,null);
         }
 
         CoinValue p = getItem(position);

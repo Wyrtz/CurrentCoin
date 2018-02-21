@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:grid="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/choice_grid"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:padding="4dp"
+
+    grid:alignmentMode="alignBounds"
+    grid:columnCount="5"
+    grid:rowOrderPreserved="false"
+    grid:useDefaultMargins="true">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        grid:srcCompat="@android:drawable/arrow_down_float"
+        grid:layout_columnWeight="0.5"
+        grid:layout_gravity="fill_horizontal"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/coinTicker"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#FF33B5E5"
+        android:gravity="center"
+        android:text="coinTicker"
+        grid:layout_columnWeight="1"
+        grid:layout_gravity="fill_horizontal" />
+
+    <TextView
+        android:id="@+id/value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#FF33B5E5"
+        android:gravity="center"
+        android:text="Value"
+        grid:layout_columnWeight="1"
+        grid:layout_gravity="fill_horizontal" />
+
+    <TextView
+        android:id="@+id/change"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#FF33B5E5"
+        android:gravity="center"
+        android:text="change"
+        grid:layout_columnWeight="1"
+        grid:layout_gravity="fill_horizontal" />
+
+    <TextView
+        android:id="@+id/myValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#FF33B5E5"
+        android:gravity="center"
+        android:text="myValue"
+        grid:layout_columnWeight="1"
+        grid:layout_gravity="fill_horizontal" />
+
+</android.support.v7.widget.GridLayout>
