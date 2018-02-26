@@ -53,7 +53,7 @@ public class MyCustomAdapter extends ArrayAdapter<CoinValue> {
             }
 
             if(coinTicker != null){
-                coinTicker.setText(p.getTicker().toString());
+                coinTicker.setText(p.getFullName());
             }
 
             if(value != null){

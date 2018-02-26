@@ -51,6 +51,10 @@ class CoinValue {
        return coinObject.getImageUrl();
     }
 
+    public String getFullName(){
+        return coinObject.getFullName();
+    }
+
     @Override
     public String toString() {
         return "" + ticker + " " + value + " " + currency;
