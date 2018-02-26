@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -39,10 +40,15 @@ public class MyCustomAdapter extends ArrayAdapter<CoinValue> {
         CoinValue p = getItem(position);
 
         if (p!=null){
+            ImageView tickerIcon = view.findViewById(R.id.tickerIcon);
             TextView coinTicker = view.findViewById(R.id.coinTicker);
             TextView value = view.findViewById(R.id.value);
             TextView change = view.findViewById(R.id.change);
             TextView myValue = view.findViewById(R.id.myValue);
+
+            if(tickerIcon != null){
+                tickerIcon.setImageURI(p.getTickerImage().toURI());     //https://developer.android.com/topic/performance/graphics/index.html
+            }
 
             if(coinTicker != null){
                 coinTicker.setText(p.getTicker().toString());

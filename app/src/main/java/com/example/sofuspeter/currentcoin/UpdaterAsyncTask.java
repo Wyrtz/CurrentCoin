@@ -59,7 +59,7 @@ public class UpdaterAsyncTask extends AsyncTask<String, Void,  ArrayList<CoinVal
             coinObjects = mainActivityRef.getCoinObjects();
             CoinValue btcCoin = new CoinValue(TICKER.BTC, btc.get("USD").getAsDouble(), Currency.getInstance("USD"), coinObjects.get("BTC"));
             CoinValue ethCoin = new CoinValue(TICKER.ETH, eth.get("USD").getAsDouble(), Currency.getInstance("USD"),coinObjects.get("ETH"));
-            CoinValue adaCoin = new CoinValue(TICKER.ADA, ada.get("USD").getAsDouble(), Currency.getInstance("USD"),coinObjects.get("ADA"));        //ToDo: get ticker from coinObeject
+            CoinValue adaCoin = new CoinValue(TICKER.ADA, ada.get("USD").getAsDouble(), Currency.getInstance("USD"),coinObjects.get("ADA"));        //ToDo: get ticker from coinObject
             coins.add(btcCoin);
             coins.add(ethCoin);
             coins.add(adaCoin);
