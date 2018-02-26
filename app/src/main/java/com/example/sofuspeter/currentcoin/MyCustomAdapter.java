@@ -1,6 +1,7 @@
 package com.example.sofuspeter.currentcoin;
 
 import android.content.Context;
+import android.nfc.Tag;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,35 +37,25 @@ public class MyCustomAdapter extends ArrayAdapter<CoinValue> {
         CoinValue p = getItem(position);
 
         if (p!=null){
-            TextView coinTicker = (TextView) view.findViewById(R.id.coinTicker);
-            TextView value = (TextView) view.findViewById(R.id.value);
-            TextView currency = (TextView) view.findViewById(R.id.currency);
-            TextView change = (TextView) view.findViewById(R.id.change);
-            TextView myValue = (TextView) view.findViewById(R.id.myValue);
+            TextView coinTicker = view.findViewById(R.id.coinTicker);
+            TextView value = view.findViewById(R.id.value);
+            TextView change = view.findViewById(R.id.change);
+            TextView myValue = view.findViewById(R.id.myValue);
 
             if(coinTicker != null){
-                coinTicker.setText("ololol"); //p.getTicker().toString()
-                Log.i(TAG,"Set ticker to: " + p.getTicker());
-            }
-
-            else{
-                Log.i(TAG,"IS NULL!");
+                coinTicker.setText(p.getTicker().toString());
             }
 
             if(value != null){
-                value.setText("" + p.getValue());
-            }
-
-            if(currency != null){
-                currency.setText("" + p.getCurrency());
+                value.setText(String.format(p.getValue().toString()));      //Recommended with String.format to get localication of how to write doubles
             }
 
             if(change != null){
-                coinTicker.setText("" + p.getChange());
+                change.setText(p.getChange());
             }
 
             if(myValue != null){
-                myValue.setText("" + p.getMyValue());
+                myValue.setText(String.format(p.getMyValue().toString()));
             }
 
         }
