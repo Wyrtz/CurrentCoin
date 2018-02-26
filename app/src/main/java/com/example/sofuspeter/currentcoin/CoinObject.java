@@ -48,4 +48,8 @@ public class CoinObject {
         return fullName;
     }
 
+    @Override
+    public String toString() {
+        return fullName;
+    }
 }

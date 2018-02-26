@@ -14,6 +14,8 @@ import java.util.ArrayList;
 /**
  * Created by SofusPeter on 18-01-2018.
  */
+
+//ToDo: bedre navn og beskrivelse
 //https://stackoverflow.com/questions/8166497/custom-adapter-for-list-view
 public class MyCustomAdapter extends ArrayAdapter<CoinValue> {
 

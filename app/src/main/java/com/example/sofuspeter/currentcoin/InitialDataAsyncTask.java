@@ -1,7 +1,6 @@
 package com.example.sofuspeter.currentcoin;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -12,7 +11,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,7 +19,7 @@ import java.util.Set;
  * Created by SofusPeter on 18-02-2017.
  */
 
-public class InitialDataAsyncTask extends AsyncTask<String, Void, ArrayList<CoinObject>> {
+public class InitialDataAsyncTask extends AsyncTask<String, Void, HashMap<String, CoinObject>> {
 
     private static final String TAG = "------------------>";
     private final MainActivity mainActivityRef;
@@ -31,10 +30,11 @@ public class InitialDataAsyncTask extends AsyncTask<String, Void, ArrayList<Coin
     }
 
     @Override
-    protected  ArrayList<CoinObject> doInBackground(String... strings) {
+    protected HashMap<String, CoinObject> doInBackground(String... strings) {
 
         //Array for all coins we find
-        ArrayList<CoinObject> coinObjects = new ArrayList<>();
+        //ArrayList<CoinObject> coinObjects = new ArrayList<>();
+        HashMap<String, CoinObject>  coinObjects = new HashMap<>();
 
         try {
             //Connect to the API
@@ -78,7 +78,7 @@ public class InitialDataAsyncTask extends AsyncTask<String, Void, ArrayList<Coin
                 coinName = coinJsonObject.get("CoinName").getAsString();                                          //coinName = name + symbol
 
                 CoinObject co = new CoinObject(id,url,imageUrl,name,coinName,fullName);
-                coinObjects.add(co);
+                coinObjects.put(name,co);
             }
 
         } catch (MalformedURLException e) {
@@ -90,7 +90,7 @@ public class InitialDataAsyncTask extends AsyncTask<String, Void, ArrayList<Coin
     }
 
     @Override
-    protected void onPostExecute(ArrayList<CoinObject> coinObjects) {
+    protected void onPostExecute(HashMap<String, CoinObject> coinObjects) {
         super.onPostExecute(coinObjects);
         mainActivityRef.setCoinObjects(coinObjects);
     }

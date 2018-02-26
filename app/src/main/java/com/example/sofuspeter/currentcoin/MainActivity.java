@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 //TODO: Get ticker icon
 //TODO: make currency spinner (so you can pick currency)
@@ -29,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
     private ConstraintLayout layout;
     private MainActivity activity;
     private ArrayList<CoinValue> coinArrayList;
-    private ArrayList<CoinObject> coinObjects;
-    MyCustomAdapter adapter;
-    private String TAG = "-->";
+    private HashMap<String, CoinObject> coinObjects;
+    private MyCustomAdapter adapter;
+    private String TAG = "----->";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +51,12 @@ public class MainActivity extends AppCompatActivity {
                 new UpdaterAsyncTask(activity).execute();
             }
         });
-        new UpdaterAsyncTask(this).execute();
         new InitialDataAsyncTask(this).execute();
+        new UpdaterAsyncTask(this).execute();
 
         //
         coinArrayList = new ArrayList<>();
-        coinObjects = new ArrayList<>();
+        coinObjects = new HashMap<>();
 
         //
         adapter = new MyCustomAdapter(this, R.id.coinListViewChild, coinArrayList);
@@ -108,8 +109,13 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    public void setCoinObjects(ArrayList<CoinObject> coinObjects) {
+    public void setCoinObjects(HashMap<String, CoinObject> coinObjects) {
         this.coinObjects.clear();
-        this.coinObjects.addAll(coinObjects);
+        this.coinObjects.putAll(coinObjects);
     }
+
+    public HashMap<String, CoinObject> getCoinObjects() {
+        return coinObjects;
+    }
+
 }

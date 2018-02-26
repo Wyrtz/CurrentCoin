@@ -15,6 +15,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Currency;
+import java.util.HashMap;
 
 /**
  * Created by SofusPeter on 21-12-2017.
@@ -33,6 +34,7 @@ public class UpdaterAsyncTask extends AsyncTask<String, Void,  ArrayList<CoinVal
     protected ArrayList<CoinValue> doInBackground(String... strings) {
 
         ArrayList<CoinValue> coins = null;
+        HashMap<String, CoinObject> coinObjects = null;
 
         try {
             //Connect to the API
@@ -54,13 +56,13 @@ public class UpdaterAsyncTask extends AsyncTask<String, Void,  ArrayList<CoinVal
             JsonObject ada = jsonObject.get("ADA").getAsJsonObject();
 
             coins  = new ArrayList<>();
-            CoinValue btcCoin = new CoinValue(TICKER.BTC, btc.get("USD").getAsDouble(), Currency.getInstance("USD"));
-            CoinValue ethCoin = new CoinValue(TICKER.ETH, eth.get("USD").getAsDouble(), Currency.getInstance("USD"));
-            CoinValue adaCoin = new CoinValue(TICKER.ADA, ada.get("USD").getAsDouble(), Currency.getInstance("USD"));
+            coinObjects = mainActivityRef.getCoinObjects();
+            CoinValue btcCoin = new CoinValue(TICKER.BTC, btc.get("USD").getAsDouble(), Currency.getInstance("USD"), coinObjects.get("BTC"));
+            CoinValue ethCoin = new CoinValue(TICKER.ETH, eth.get("USD").getAsDouble(), Currency.getInstance("USD"),coinObjects.get("ETH"));
+            CoinValue adaCoin = new CoinValue(TICKER.ADA, ada.get("USD").getAsDouble(), Currency.getInstance("USD"),coinObjects.get("ADA"));        //ToDo: get ticker from coinObeject
             coins.add(btcCoin);
             coins.add(ethCoin);
             coins.add(adaCoin);
-
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
