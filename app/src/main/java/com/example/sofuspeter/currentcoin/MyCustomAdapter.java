@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 /**
@@ -47,7 +49,8 @@ public class MyCustomAdapter extends ArrayAdapter<CoinValue> {
             TextView myValue = view.findViewById(R.id.myValue);
 
             if(tickerIcon != null){
-                tickerIcon.setImageURI(p.getTickerImage().toURI());     //https://developer.android.com/topic/performance/graphics/index.html
+                //tickerIcon.setImageURI(p.getTickerImage().toURI());     //https://developer.android.com/topic/performance/graphics/index.html
+                Glide.with(getContext()).load(p.getTickerImage().toString()).into(tickerIcon);
             }
 
             if(coinTicker != null){
