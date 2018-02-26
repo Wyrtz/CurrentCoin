@@ -49,8 +49,7 @@ public class MyCustomAdapter extends ArrayAdapter<CoinValue> {
             TextView myValue = view.findViewById(R.id.myValue);
 
             if(tickerIcon != null){
-                //tickerIcon.setImageURI(p.getTickerImage().toURI());     //https://developer.android.com/topic/performance/graphics/index.html
-                Glide.with(getContext()).load(p.getTickerImage().toString()).into(tickerIcon);
+                Glide.with(getContext()).load(p.getTickerImage().toString()).into(tickerIcon);      //ToDo: not all pictures are equal.. ADA ser sjov ud (sort baggrund?) og man kan se ramme på ETH. However! Seems like it's ctypotcompare who got shitty images (https://www.cryptocompare.com/media/12318177/ada.png)
             }
 
             if(coinTicker != null){
