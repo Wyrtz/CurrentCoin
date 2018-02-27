@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<CoinValue> coinArrayList;
     private HashMap<String, CoinObject> coinObjects;
     private MyCustomAdapter adapter;
-    private String TAG = "----->";
+    private String TAG = "------->";
+    private SwipeRefreshLayout mySwipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,19 @@ public class MainActivity extends AppCompatActivity {
         ListView coinList = (ListView) findViewById(R.id.coinList);
         coinList.setAdapter(adapter);
 
+        /** Sets up a SwipeRefreshLayout.OnRefreshListener that is invoked when the user
+         * * performs a swipe-to-refresh gesture.
+         * */
+        mySwipeRefreshLayout = findViewById(R.id.swiperefresh);
+        mySwipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        new UpdaterAsyncTask(activity).execute();
+                    }
+                }
+        );
+
     }
 
     @Override
@@ -88,13 +104,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void informUser(final String message){
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, message, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        Snackbar.make(findViewById(R.id.myCoordinatorLayout), message, Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
 
     }
 
@@ -107,6 +118,9 @@ public class MainActivity extends AppCompatActivity {
         this.coinArrayList.clear();
         this.coinArrayList.addAll(coinArrayList);
         adapter.notifyDataSetChanged();
+        mySwipeRefreshLayout.setRefreshing(false);
+        informUser("Updated");
+
     }
 
     public void setCoinObjects(HashMap<String, CoinObject> coinObjects) {
