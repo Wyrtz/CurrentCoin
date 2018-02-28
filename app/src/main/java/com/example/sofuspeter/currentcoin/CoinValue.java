@@ -55,6 +55,10 @@ class CoinValue {
         return coinObject.getFullName();
     }
 
+    public void setValue(Double value) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
         return "" + ticker + " " + value + " " + currency;

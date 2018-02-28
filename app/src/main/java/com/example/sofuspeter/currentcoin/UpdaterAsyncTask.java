@@ -22,7 +22,6 @@ import java.util.HashMap;
  */
 
 //ToDo: make Main activity create coins and put them in a list
-//ToDo: make a coins value able to update its value(s)
 //ToDo: give list to updater
 //ToDo: from list, create string for API
 //ToDo: for all coins, update their values from API callback

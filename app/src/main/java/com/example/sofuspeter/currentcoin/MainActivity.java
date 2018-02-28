@@ -17,10 +17,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-//TODO: Get ticker icon
 //TODO: make currency spinner (so you can pick currency)
 //TODO: Create "more" option
-//TODO: Swipe down updates
 //TODO: add price change
 //TODO: Plus to add new currency (how to update then?)
 
