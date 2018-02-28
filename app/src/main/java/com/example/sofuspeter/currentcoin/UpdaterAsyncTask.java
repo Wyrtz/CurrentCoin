@@ -14,32 +14,26 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Currency;
-import java.util.HashMap;
 
 /**
  * Created by SofusPeter on 21-12-2017.
  */
 
-//ToDo: make Main activity create coins and put them in a list
-//ToDo: give list to updater
 //ToDo: from list, create string for API
-//ToDo: for all coins, update their values from API callback
+//ToDo: for all coins, update their values from API callback (not a switchcase like now!)
 
 public class UpdaterAsyncTask extends AsyncTask<String, Void,  ArrayList<CoinValue>> {
-    private static final String TAG = "-->";
+    private static final String TAG = "------>";
     private final MainActivity mainActivityRef;
 
     public UpdaterAsyncTask(MainActivity mainActivity) {
         mainActivityRef = mainActivity;
-
     }
 
     @Override
     protected ArrayList<CoinValue> doInBackground(String... strings) {
 
-        ArrayList<CoinValue> coins = null;
-        HashMap<String, CoinObject> coinObjects = null;
+        ArrayList<CoinValue> coins = mainActivityRef.getCoins();
 
         try {
             //Connect to the API
@@ -60,14 +54,20 @@ public class UpdaterAsyncTask extends AsyncTask<String, Void,  ArrayList<CoinVal
             JsonObject eth = jsonObject.get("ETH").getAsJsonObject();
             JsonObject ada = jsonObject.get("ADA").getAsJsonObject();
 
-            coins  = new ArrayList<>();
-            coinObjects = mainActivityRef.getCoinObjects();
-            CoinValue btcCoin = new CoinValue(TICKER.BTC, btc.get("USD").getAsDouble(), Currency.getInstance("USD"), coinObjects.get("BTC"));
-            CoinValue ethCoin = new CoinValue(TICKER.ETH, eth.get("USD").getAsDouble(), Currency.getInstance("USD"), coinObjects.get("ETH"));
-            CoinValue adaCoin = new CoinValue(TICKER.ADA, ada.get("USD").getAsDouble(), Currency.getInstance("USD"), coinObjects.get("ADA"));        //ToDo: get ticker from coinObject
-            coins.add(btcCoin);
-            coins.add(ethCoin);
-            coins.add(adaCoin);
+            for (CoinValue c: coins){
+                   switch (c.getTicker()){
+                       case ADA:
+                           c.setValue(ada.get("USD").getAsDouble());
+                           break;
+                       case BTC:
+                           c.setValue(btc.get("USD").getAsDouble());
+                           break;
+                       case ETH:
+                           c.setValue(eth.get("USD").getAsDouble());
+                           break;
+                       default:
+                   }
+            }
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -78,9 +78,10 @@ public class UpdaterAsyncTask extends AsyncTask<String, Void,  ArrayList<CoinVal
     }
 
     @Override
-    protected void onPostExecute(ArrayList<CoinValue> coinValues) {
-        super.onPostExecute(coinValues);
-        mainActivityRef.setCoinArrayList(coinValues);
+    protected void onPostExecute(ArrayList<CoinValue> coins) {
+        super.onPostExecute(coins);
+        mainActivityRef.postUpdate();
+
     }
 
 }

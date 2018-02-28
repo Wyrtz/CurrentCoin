@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.HashMap;
 
 //TODO: make currency spinner (so you can pick currency)
@@ -24,9 +25,7 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String updateSuccessText = "Updated rates";
     private FloatingActionButton fab;
-    private View rootView;
     private ConstraintLayout layout;
     private MainActivity activity;
     private ArrayList<CoinValue> coinArrayList;
@@ -47,17 +46,16 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, updateSuccessText, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                new UpdaterAsyncTask(activity).execute();
+                informUser("No action (yet!)");
             }
         });
-        new InitialDataAsyncTask(this).execute();
-        new UpdaterAsyncTask(this).execute();
-
         //
         coinArrayList = new ArrayList<>();
         coinObjects = new HashMap<>();
+
+        //Get all coins and information about them
+        new InitialDataAsyncTask(this).execute();
+
 
         //
         adapter = new MyCustomAdapter(this, R.id.coinListViewChild, coinArrayList);
@@ -77,6 +75,18 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
+    }
+
+    private void fillCoinArrayList() {
+        CoinValue btcCoin = new CoinValue(TICKER.BTC, 0.0, Currency.getInstance("USD"), coinObjects.get("BTC"));
+        CoinValue ethCoin = new CoinValue(TICKER.ETH, 0.0, Currency.getInstance("USD"), coinObjects.get("ETH"));
+        CoinValue adaCoin = new CoinValue(TICKER.ADA, 0.0, Currency.getInstance("USD"), coinObjects.get("ADA"));        //ToDo: get ticker from coinObject
+        coinArrayList.add(btcCoin);
+        coinArrayList.add(ethCoin);
+        coinArrayList.add(adaCoin);
+
+        //and update their values with UpdaterAsyncTask
+        new UpdaterAsyncTask(this).execute();
     }
 
     @Override
@@ -104,30 +114,31 @@ public class MainActivity extends AppCompatActivity {
     public void informUser(final String message){
         Snackbar.make(findViewById(R.id.myCoordinatorLayout), message, Snackbar.LENGTH_SHORT)
                 .setAction("Action", null).show();
-
     }
 
-    public void changeView(View view) {
-        Intent navIntent = new Intent(this, Test.class);
-        startActivity(navIntent);
-    }
-
-    public void setCoinArrayList(ArrayList<CoinValue> coinArrayList) {
-        this.coinArrayList.clear();
-        this.coinArrayList.addAll(coinArrayList);
+    //After updating the rates. Re-render the adapter (list), stop the "update" symbol and write "updated"
+    public void postUpdate() {
         adapter.notifyDataSetChanged();
         mySwipeRefreshLayout.setRefreshing(false);
         informUser("Updated");
 
     }
 
+    //This method is called by "initialDataAsyncTask" on completion. The AsyncTask has now downloaded the name of all coins available at the API, and it is saved in coinObjects.
+    //Now, fill in the coinArrayList ( which holds all coins to be displayed)
     public void setCoinObjects(HashMap<String, CoinObject> coinObjects) {
         this.coinObjects.clear();
         this.coinObjects.putAll(coinObjects);
+        //Fill in the coin-array
+        fillCoinArrayList();
+
     }
 
     public HashMap<String, CoinObject> getCoinObjects() {
         return coinObjects;
     }
 
+    public ArrayList<CoinValue> getCoins() {
+        return coinArrayList;
+    }
 }
