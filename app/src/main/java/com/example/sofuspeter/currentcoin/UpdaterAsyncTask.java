@@ -21,6 +21,12 @@ import java.util.HashMap;
  * Created by SofusPeter on 21-12-2017.
  */
 
+//ToDo: make Main activity create coins and put them in a list
+//ToDo: make a coins value able to update its value(s)
+//ToDo: give list to updater
+//ToDo: from list, create string for API
+//ToDo: for all coins, update their values from API callback
+
 public class UpdaterAsyncTask extends AsyncTask<String, Void,  ArrayList<CoinValue>> {
     private static final String TAG = "-->";
     private final MainActivity mainActivityRef;
@@ -58,8 +64,8 @@ public class UpdaterAsyncTask extends AsyncTask<String, Void,  ArrayList<CoinVal
             coins  = new ArrayList<>();
             coinObjects = mainActivityRef.getCoinObjects();
             CoinValue btcCoin = new CoinValue(TICKER.BTC, btc.get("USD").getAsDouble(), Currency.getInstance("USD"), coinObjects.get("BTC"));
-            CoinValue ethCoin = new CoinValue(TICKER.ETH, eth.get("USD").getAsDouble(), Currency.getInstance("USD"),coinObjects.get("ETH"));
-            CoinValue adaCoin = new CoinValue(TICKER.ADA, ada.get("USD").getAsDouble(), Currency.getInstance("USD"),coinObjects.get("ADA"));        //ToDo: get ticker from coinObject
+            CoinValue ethCoin = new CoinValue(TICKER.ETH, eth.get("USD").getAsDouble(), Currency.getInstance("USD"), coinObjects.get("ETH"));
+            CoinValue adaCoin = new CoinValue(TICKER.ADA, ada.get("USD").getAsDouble(), Currency.getInstance("USD"), coinObjects.get("ADA"));        //ToDo: get ticker from coinObject
             coins.add(btcCoin);
             coins.add(ethCoin);
             coins.add(adaCoin);
