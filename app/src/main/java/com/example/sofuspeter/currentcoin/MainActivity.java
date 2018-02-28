@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void informUser(final String message){
-        Snackbar.make(findViewById(R.id.myCoordinatorLayout), message, Snackbar.LENGTH_LONG)
+        Snackbar.make(findViewById(R.id.myCoordinatorLayout), message, Snackbar.LENGTH_SHORT)
                 .setAction("Action", null).show();
 
     }
