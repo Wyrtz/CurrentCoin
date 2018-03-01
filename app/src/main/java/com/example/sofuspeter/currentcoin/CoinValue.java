@@ -12,18 +12,18 @@ import java.util.Currency;
 class CoinValue {
 
     private final CoinObject coinObject;
-    private TICKER ticker;
+    private String ticker;
     private Double value;
     private Currency currency;
 
-    public CoinValue(TICKER ticker, Double value, Currency currency,CoinObject coinObject) {
+    public CoinValue(String ticker, Double value, Currency currency,CoinObject coinObject) {
         this.ticker = ticker;
         this.value = value;
         this.currency = currency;
         this.coinObject = coinObject;
     }
 
-    public TICKER getTicker() {
+    public String getTicker() {
         return ticker;
     }
 

@@ -19,9 +19,6 @@ import java.util.ArrayList;
  * Created by SofusPeter on 21-12-2017.
  */
 
-//ToDo: from list, create string for API
-//ToDo: for all coins, update their values from API callback (not a switchcase like now!)
-
 public class UpdaterAsyncTask extends AsyncTask<String, Void,  ArrayList<CoinValue>> {
     private static final String TAG = "------>";
     private final MainActivity mainActivityRef;
@@ -35,10 +32,14 @@ public class UpdaterAsyncTask extends AsyncTask<String, Void,  ArrayList<CoinVal
 
         ArrayList<CoinValue> coins = mainActivityRef.getCoins();
 
+        //Format the URL, ready to make a call to the API
+        String baseURL = "https://min-api.cryptocompare.com/data/pricemulti?fsyms=";
+        String fullURL = baseURL + formRequest(coins);
+        Log.i(TAG,fullURL);
+
         try {
             //Connect to the API
-            //URL url = new URL("https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=DKK,USD");
-            URL url = new URL("https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,ADA&tsyms=USD,DKK");
+            URL url = new URL(fullURL);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.connect();
             connection.setRequestMethod("GET");
@@ -48,26 +49,13 @@ public class UpdaterAsyncTask extends AsyncTask<String, Void,  ArrayList<CoinVal
             JsonElement jsonElement = jsonParser.parse(new InputStreamReader((InputStream) connection.getContent()));
             JsonObject jsonObject = jsonElement.getAsJsonObject();
 
-            //Get the response as string from JSON
-            Log.i(TAG, jsonObject.toString());
-            JsonObject btc = jsonObject.get("BTC").getAsJsonObject();
-            JsonObject eth = jsonObject.get("ETH").getAsJsonObject();
-            JsonObject ada = jsonObject.get("ADA").getAsJsonObject();
-
-            for (CoinValue c: coins){
-                   switch (c.getTicker()){
-                       case ADA:
-                           c.setValue(ada.get("USD").getAsDouble());
-                           break;
-                       case BTC:
-                           c.setValue(btc.get("USD").getAsDouble());
-                           break;
-                       case ETH:
-                           c.setValue(eth.get("USD").getAsDouble());
-                           break;
-                       default:
-                   }
+            //For all coins in the list, create a Jsonobject from the name of the ticker. Set the value of said coin to the value (denoted with the desirred currency)
+            for(CoinValue coin:coins){
+                JsonObject coinJsonObject = jsonObject.get(coin.getTicker()).getAsJsonObject();
+                String currency = coin.getCurrency().toString();
+                coin.setValue(coinJsonObject.get(currency).getAsDouble());
             }
+
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -75,6 +63,20 @@ public class UpdaterAsyncTask extends AsyncTask<String, Void,  ArrayList<CoinVal
             e.printStackTrace();
         }
         return coins;
+    }
+
+    private String formRequest( ArrayList<CoinValue> coins) {
+        //Example of correct format: https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,ADA,&tsyms=USD
+        String response = "";
+        for(CoinValue coin: coins){
+            response = response.concat(coin.getTicker() + ",");
+        }
+        response = response.concat("&tsyms=");
+
+        //As of now, all are in the same currency
+        response = response.concat(coins.get(0).getCurrency().toString());
+
+        return response;
     }
 
     @Override

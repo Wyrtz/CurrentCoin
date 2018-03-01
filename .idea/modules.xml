@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CurrentCoin.iml" filepath="$PROJECT_DIR$/CurrentCoin.iml" />
-      <module fileurl="file://C:\Users\SofusPeter\AndroidStudioProjects\CurrentCoin\.idea\CurrentCoin.iml" filepath="C:\Users\SofusPeter\AndroidStudioProjects\CurrentCoin\.idea\CurrentCoin.iml" />
-      <module fileurl="file://C:\Users\SofusPeter\StudioProjects\CurrentCoin\CurrentCoin.iml" filepath="C:\Users\SofusPeter\StudioProjects\CurrentCoin\CurrentCoin.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
