@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:grid="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/coinListViewChild"
+
+    android:id="@+id/choice_grid"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
@@ -16,22 +18,22 @@
         android:id="@+id/tickerIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingEnd="0dp"
+        grid:srcCompat="@android:drawable/arrow_down_float"
         grid:layout_columnWeight="0.1"
-        grid:layout_gravity="fill_horizontal"
         grid:layout_rowWeight="1"
-        grid:srcCompat="@android:drawable/arrow_down_float" />
+        grid:layout_gravity="fill_horizontal"
+        android:gravity="center"
+        android:paddingEnd="0dp"/>
 
     <TextView
         android:id="@+id/coinTicker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:paddingLeft="0dp"
         android:text="coinTicker"
         grid:layout_columnWeight="1"
-        grid:layout_gravity="fill_horizontal" />
+        grid:layout_gravity="fill_horizontal"
+        android:paddingLeft="0dp"/>
 
     <TextView
         android:id="@+id/value"

@@ -21,6 +21,7 @@ import java.util.HashMap;
 //TODO: add price change
 //TODO: Plus to add new currency (how to update then?)
 //ToDo: make coins consistent to "on create"
+//ToDo: delete coin!
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,10 +56,11 @@ public class MainActivity extends AppCompatActivity {
         //Get all coins and information about them
         new InitialDataAsyncTask(this).execute();
 
-
+        View header = getLayoutInflater().inflate(R.layout.coin_list_header,null);
         //
         adapter = new MyCustomAdapter(this, R.id.coinListViewChild, coinArrayList);
         ListView coinList = (ListView) findViewById(R.id.coinList);
+        coinList.addHeaderView(header);
         coinList.setAdapter(adapter);
 
         /** Sets up a SwipeRefreshLayout.OnRefreshListener that is invoked when the user
