@@ -12,28 +12,19 @@
     grid:alignmentMode="alignBounds"
     grid:columnCount="5"
     grid:rowOrderPreserved="false"
-    grid:useDefaultMargins="true">
-
-    <ImageView
-        android:id="@+id/tickerIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        grid:srcCompat="@android:drawable/arrow_down_float"
-        grid:layout_columnWeight="0.1"
-        grid:layout_rowWeight="1"
-        grid:layout_gravity="fill_horizontal"
-        android:gravity="center"
-        android:paddingEnd="0dp"/>
+    grid:useDefaultMargins="true"
+    android:backgroundTint="@color/colorPrimaryLight"
+    android:background="@color/colorPrimaryDark">
 
     <TextView
         android:id="@+id/coinTicker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:text="coinTicker"
+        android:paddingLeft="0dp"
+        android:text="Coin name"
         grid:layout_columnWeight="1"
-        grid:layout_gravity="fill_horizontal"
-        android:paddingLeft="0dp"/>
+        grid:layout_gravity="fill_horizontal" />
 
     <TextView
         android:id="@+id/value"
@@ -49,7 +40,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:text="change"
+        android:text="Change"
         grid:layout_columnWeight="1"
         grid:layout_gravity="fill_horizontal" />
 
@@ -58,7 +49,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:text="myValue"
+        android:text="My value"
         grid:layout_columnWeight="1"
         grid:layout_gravity="fill_horizontal" />
 

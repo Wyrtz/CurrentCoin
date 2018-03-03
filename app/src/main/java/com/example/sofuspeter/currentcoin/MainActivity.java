@@ -21,7 +21,8 @@ import java.util.HashMap;
 //TODO: add price change
 //TODO: Plus to add new currency (how to update then?)
 //ToDo: make coins consistent to "on create"
-//ToDo: delete coin!
+//ToDo: delete coin! Swipe or long press ?
+//ToDo: other sites: Info, news, helpful links
 
 public class MainActivity extends AppCompatActivity {
 
