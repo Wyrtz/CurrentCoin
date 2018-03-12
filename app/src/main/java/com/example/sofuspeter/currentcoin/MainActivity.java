@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 addCoin();
             }
         });
+
         //
         coinArrayList = new ArrayList<>();
         coinObjects = new HashMap<>();
@@ -58,11 +60,27 @@ public class MainActivity extends AppCompatActivity {
         new InitialDataAsyncTask(this).execute();
 
         View header = getLayoutInflater().inflate(R.layout.coin_list_header,null);
+
         //
         adapter = new MyCustomAdapter(this, R.id.coinListViewChild, coinArrayList);
-        ListView coinList = (ListView) findViewById(R.id.coinList);
+        final ListView coinList = (ListView) findViewById(R.id.coinList);
         coinList.addHeaderView(header);
         coinList.setAdapter(adapter);
+
+        //ToDo: "undo" of deletion
+        //Set long press to delete object
+        coinList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                informUser("Deleted " + coinArrayList.get(i-1).getFullName());
+                coinArrayList.remove(i-1);
+                adapter.notifyDataSetChanged();
+                return true;
+            }
+        });
+
+        //Set press/tap top open more information
+
 
         /** Sets up a SwipeRefreshLayout.OnRefreshListener that is invoked when the user
          * * performs a swipe-to-refresh gesture.
