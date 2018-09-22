@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:grid="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/addCoinListViewChild"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:padding="4dp"
+
+    grid:alignmentMode="alignBounds"
+    grid:columnCount="3"
+    grid:rowOrderPreserved="false"
+    grid:useDefaultMargins="true">
+
+    <ImageView
+        android:id="@+id/tickerIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingEnd="0dp"
+        grid:layout_columnWeight="0.1"
+        grid:layout_gravity="fill_horizontal"
+        grid:layout_rowWeight="1"
+        grid:srcCompat="@android:drawable/arrow_down_float" />
+
+    <TextView
+        android:id="@+id/coinName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:paddingLeft="0dp"
+        android:text="Coin Name"
+        grid:layout_columnWeight="1"
+        grid:layout_gravity="fill_horizontal" />
+
+    <TextView
+        android:id="@+id/coinTicker"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:text="Coin Ticker"
+        grid:layout_columnWeight="1"
+        grid:layout_gravity="fill_horizontal" />
+
+
+</android.support.v7.widget.GridLayout>

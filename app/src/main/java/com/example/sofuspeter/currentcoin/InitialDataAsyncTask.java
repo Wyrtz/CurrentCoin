@@ -59,7 +59,7 @@ public class InitialDataAsyncTask extends AsyncTask<String, Void, HashMap<String
                 int id;
                 URL url;
                 URL imageUrl;
-                String name;
+                String symbol;
                 String fullName;
                 String coinName;
 
@@ -73,12 +73,12 @@ public class InitialDataAsyncTask extends AsyncTask<String, Void, HashMap<String
                 } catch (java.lang.NullPointerException nullPoint){
                     imageUrl = new URL ("https://vignette.wikia.nocookie.net/theimaginenation/images/e/ed/N-a.jpg/revision/latest?cb=20121209234504");      //Backup picture TODO: permenant link to backup picture
                 }
-                name = coinJsonObject.get("Name").getAsString();                                                  //Name = the symbol eg LTC
+                symbol = coinJsonObject.get("Symbol").getAsString();                                                  //Name = the symbol eg LTC
                 fullName = coinJsonObject.get("FullName").getAsString();                                          //FullName = name + symbol eg Litecoin (LTC)
                 coinName = coinJsonObject.get("CoinName").getAsString();                                          //coinName = name + symbol
 
-                CoinObject co = new CoinObject(id,url,imageUrl,name,coinName,fullName);
-                coinObjects.put(name,co);
+                CoinObject co = new CoinObject(id,url,imageUrl,symbol,coinName,fullName);
+                coinObjects.put(symbol,co);
             }
 
         } catch (MalformedURLException e) {

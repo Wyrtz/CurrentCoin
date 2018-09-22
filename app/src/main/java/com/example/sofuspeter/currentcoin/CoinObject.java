@@ -9,17 +9,17 @@ import java.net.URL;
 public class CoinObject {
 
     private int id;                                         //Internal on cryptocompare (might be needed for further calls)
-    private URL url;                                     //URL to the coin on cryptocompare, eg. https://www.cryptocompare.com/coins/ltc/overview
-    private URL imageUrl;                                //URL to a picture of the coin, eg. https://www.cryptocompare.com/media/19782/litecoin-logo.png
-    private String name;                                    //Name = the symbol eg LTC
-    private String coinName;                                //FullName = name + symbol eg Litecoin (LTC)
-    private String fullName;                                //coinName = name + symbol
+    private URL url;                                        //URL to the coin on cryptocompare, eg. https://www.cryptocompare.com/coins/ltc/overview
+    private URL imageUrl;                                   //URL to a picture of the coin, eg. https://www.cryptocompare.com/media/19782/litecoin-logo.png
+    private String symbol;                                  //Name = the symbol eg LTC
+    private String coinName;                                //coinName = name eg Litecoin
+    private String fullName;                                //FullName = name + symbol eg Litecoin (LTC)
 
-    public CoinObject(int id, URL url, URL imageUrl, String name, String coinName, String fullName) {
+    public CoinObject(int id, URL url, URL imageUrl, String symbol, String coinName, String fullName) {
         this.id = id;
         this.url = url;
         this.imageUrl = imageUrl;
-        this.name = name;
+        this.symbol = symbol;
         this.coinName = coinName;
         this.fullName = fullName;
     }
@@ -36,8 +36,8 @@ public class CoinObject {
         return imageUrl;
     }
 
-    public String getName() {
-        return name;
+    public String getSymbol() {
+        return symbol;
     }
 
     public String getCoinName() {

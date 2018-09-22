@@ -1,5 +1,6 @@
 package com.example.sofuspeter.currentcoin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -79,7 +80,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Add a new coin to the overview
     private void addCoin() {
+        //Start list picker activity
+        Intent changeActivityIntent = new Intent(this,PickCoinActivity.class);
+        changeActivityIntent.putExtra("coinObjects", coinObjects);
+        startActivity(changeActivityIntent);
+        //Use result to create new coin
         CoinValue newCoin = new CoinValue("BTC",666.0,Currency.getInstance("USD"), coinObjects.get("BTC"));
         coinArrayList.add(newCoin);
         adapter.notifyDataSetChanged();
@@ -88,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void fillCoinArrayList() {
         CoinValue btcCoin = new CoinValue("BTC", 0.0, Currency.getInstance("USD"), coinObjects.get("BTC"));
-        CoinValue ethCoin = new CoinValue("ETH", 0.0, Currency.getInstance("USD"), coinObjects.get("ETH"));
+        CoinValue ethCoin = new CoinValue("ETH", 0.0, Currency.getInstance("USD"), coinObjects.get("ETH"));        //ToDo: get coins from disk
         CoinValue adaCoin = new CoinValue("ADA", 0.0, Currency.getInstance("USD"), coinObjects.get("ADA"));        //ToDo: get ticker from coinObject
         coinArrayList.add(btcCoin);
         coinArrayList.add(ethCoin);
