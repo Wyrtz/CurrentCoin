@@ -1,12 +1,14 @@
 package com.example.sofuspeter.currentcoin;
 
+import android.support.annotation.NonNull;
+
 import java.net.URL;
 
 /**
  * Created by SofusPeter on 18-02-2018.
  */
 
-public class CoinObject {
+public class CoinObject implements Comparable{
 
     private int id;                                         //Internal on cryptocompare (might be needed for further calls)
     private URL url;                                        //URL to the coin on cryptocompare, eg. https://www.cryptocompare.com/coins/ltc/overview
@@ -20,7 +22,7 @@ public class CoinObject {
         this.url = url;
         this.imageUrl = imageUrl;
         this.symbol = symbol;
-        this.coinName = coinName;
+        this.coinName = coinName.trim();
         this.fullName = fullName;
     }
 
@@ -51,5 +53,10 @@ public class CoinObject {
     @Override
     public String toString() {
         return fullName;
+    }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        return this.getCoinName().compareTo(((CoinObject) o).getCoinName());
     }
 }

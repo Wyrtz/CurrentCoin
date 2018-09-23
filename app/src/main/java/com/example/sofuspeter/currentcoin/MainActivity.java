@@ -82,15 +82,24 @@ public class MainActivity extends AppCompatActivity {
 
     //Add a new coin to the overview
     private void addCoin() {
-        //Start list picker activity
-        Intent changeActivityIntent = new Intent(this,PickCoinActivity.class);
-        changeActivityIntent.putExtra("coinObjects", coinObjects);
-        startActivity(changeActivityIntent);
-        //Use result to create new coin
-        CoinValue newCoin = new CoinValue("BTC",666.0,Currency.getInstance("USD"), coinObjects.get("BTC"));
-        coinArrayList.add(newCoin);
-        adapter.notifyDataSetChanged();
-        new UpdaterAsyncTask(this).execute();
+//        //Start list picker activity
+//        Intent changeActivityIntent = new Intent(this,PickCoinDialog.class);
+//        changeActivityIntent.putExtra("coinObjects", coinObjects);
+//        startActivity(changeActivityIntent);
+
+        //** Use dialogs in stead ? **
+        PickCoinDialog pickCoinDialog = new PickCoinDialog();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("coinObjects", coinObjects);
+        pickCoinDialog.setArguments(bundle);
+        pickCoinDialog.show(getFragmentManager(),"PickCoinDialog");
+
+        //ToDo: get result back from dialog picker
+//        //Use result to create new coin
+//        CoinValue newCoin = new CoinValue("BTC",666.0,Currency.getInstance("USD"), coinObjects.get("BTC"));
+//        coinArrayList.add(newCoin);
+//        adapter.notifyDataSetChanged();
+//        new UpdaterAsyncTask(this).execute();
     }
 
     private void fillCoinArrayList() {
