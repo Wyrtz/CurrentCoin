@@ -75,7 +75,7 @@ public class InitialDataAsyncTask extends AsyncTask<String, Void, HashMap<String
                 }
                 symbol = coinJsonObject.get("Symbol").getAsString();                                                  //Name = the symbol eg LTC
                 fullName = coinJsonObject.get("FullName").getAsString();                                          //FullName = name + symbol eg Litecoin (LTC)
-                coinName = coinJsonObject.get("CoinName").getAsString();                                          //coinName = name + symbol
+                coinName = coinJsonObject.get("CoinName").getAsString();                                          //coinName = name
 
                 CoinObject co = new CoinObject(id,url,imageUrl,symbol,coinName,fullName);
                 coinObjects.put(symbol,co);

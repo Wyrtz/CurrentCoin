@@ -37,6 +37,26 @@ public class MainActivity extends AppCompatActivity {
     private SwipeRefreshLayout mySwipeRefreshLayout;
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (resultCode){
+        case 0:
+            String requestedCoinSymbol = data.getStringExtra("symbol");
+            addCoin(requestedCoinSymbol);
+        }
+    }
+
+    //Add a new coin to the list
+    private void addCoin(String requestCode) {
+    CoinObject coinObject = coinObjects.get(requestCode);
+    CoinValue newCoin = new CoinValue(coinObject.getSymbol(),1.0,Currency.getInstance("USD"), coinObject); //ToDo: Handle other currencies
+    coinArrayList.add(newCoin);
+    adapter.notifyDataSetChanged();
+    new UpdaterAsyncTask(this).execute();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = this;
@@ -48,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addCoin();
+                addCoinButton();
             }
         });
         //
@@ -80,26 +100,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //Add a new coin to the overview
-    private void addCoin() {
-//        //Start list picker activity
-//        Intent changeActivityIntent = new Intent(this,PickCoinDialog.class);
-//        changeActivityIntent.putExtra("coinObjects", coinObjects);
-//        startActivity(changeActivityIntent);
-
-        //** Use dialogs in stead ? **
+    //Start dialog to pick new coin from list of all possible coins (aka. those found in coinObjects)
+    private void addCoinButton() {
         PickCoinDialog pickCoinDialog = new PickCoinDialog();
         Bundle bundle = new Bundle();
         bundle.putSerializable("coinObjects", coinObjects);
         pickCoinDialog.setArguments(bundle);
+       // pickCoinDialog.setTargetFragment(,0);
         pickCoinDialog.show(getFragmentManager(),"PickCoinDialog");
 
-        //ToDo: get result back from dialog picker
-//        //Use result to create new coin
-//        CoinValue newCoin = new CoinValue("BTC",666.0,Currency.getInstance("USD"), coinObjects.get("BTC"));
-//        coinArrayList.add(newCoin);
-//        adapter.notifyDataSetChanged();
-//        new UpdaterAsyncTask(this).execute();
     }
 
     private void fillCoinArrayList() {
