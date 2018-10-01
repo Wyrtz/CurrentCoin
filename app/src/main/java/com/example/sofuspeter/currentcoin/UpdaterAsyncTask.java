@@ -19,6 +19,8 @@ import java.util.ArrayList;
  * Created by SofusPeter on 21-12-2017.
  */
 
+//ToDo: java.lang.NullPointerException: Attempt to invoke virtual method 'com.google.gson.JsonObject com.google.gson.JsonElement.getAsJsonObject()' on a null object reference
+
 public class UpdaterAsyncTask extends AsyncTask<String, Void,  ArrayList<CoinValue>> {
     private static final String TAG = "------>";
     private final MainActivity mainActivityRef;
