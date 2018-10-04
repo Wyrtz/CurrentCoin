@@ -172,11 +172,13 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG,"readFromSharedPref:" + readFromSharedPref);
             coinArrayList = gson.fromJson(readFromSharedPref, new TypeToken<ArrayList<CoinValue>>() {
             }.getType());
-//            Log.d(TAG,"coinArrayList: " + coinArrayList.isEmpty());
-//            for (CoinValue cv:coinArrayList){
-//                Log.d(TAG,"Is one");
-//            }
+            for (CoinValue cv: coinArrayList){
+                Log.d(TAG,"Is one");
+                CoinValue newCoin = new CoinValue(cv.getTicker(),0.0, Currency.getInstance("USD"),coinObjects.get(cv.getTicker()));
+                coinArrayList.add(newCoin);
+            }
         }
+        //adapter.notifyDataSetChanged();
         //and update their values with UpdaterAsyncTask
         new UpdaterAsyncTask(this).execute();
     }

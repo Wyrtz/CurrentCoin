@@ -54,7 +54,7 @@ public class UpdaterAsyncTask extends AsyncTask<String, Void,  ArrayList<CoinVal
             //For all coins in the list, create a Jsonobject from the name of the ticker. Set the value of said coin to the value (denoted with the desirred currency)
             for(CoinValue coin:coins){
                 JsonObject coinJsonObject = jsonObject.get(coin.getTicker()).getAsJsonObject();
-                String currency = coin.getCurrency().toString();
+                String currency = "USD"; //coin.getCurrency().toString();
                 coin.setValue(coinJsonObject.get(currency).getAsDouble());
             }
 
@@ -73,10 +73,9 @@ public class UpdaterAsyncTask extends AsyncTask<String, Void,  ArrayList<CoinVal
         for(CoinValue coin: coins){
             response = response.concat(coin.getTicker() + ",");
         }
-        response = response.concat("&tsyms=");
-
         //As of now, all are in the same currency
-        response = response.concat(coins.get(0).getCurrency().toString());
+        response = response.concat("&tsyms=USD");
+        //response = response.concat(coins.get(0).getCurrency().toString());
 
         return response;
     }
